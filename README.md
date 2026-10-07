@@ -76,6 +76,10 @@ Always run `npx devignerui list` for the current set — the library adds compon
 - 💬 Discord: https://discord.gg/PSv2aFYhuC
 - 🐦 X: https://x.com/devignerui
 
+## Acknowledgements
+
+Parts of this skill were drafted with the help of Anthropic's Claude. Devigner UI is a trademark of its respective owners; this is an unofficial, community-made skill.
+
 ## License
 
 MIT for this skill. Devigner UI components are free for personal and commercial use under their own terms — see their site.
