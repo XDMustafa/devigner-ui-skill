@@ -4,6 +4,8 @@ A [Claude Agent Skill](https://docs.claude.com/en/docs/claude-code/skills) that 
 
 > ⚠️ **Unofficial.** This is a community-made skill, not affiliated with the Devigner team. It just wraps their public CLI and workflow so Claude uses them the right way.
 
+[![skills.sh](https://skills.sh/b/XDMustafa/devigner-ui-skill)](https://skills.sh/XDMustafa/devigner-ui-skill)
+
 ## Why this exists
 
 Devigner UI components aren't imported from a package — they're copied into your repo as editable `.tsx` files via `npx devignerui add <name>`. Without guidance, an AI agent tends to hallucinate component names or try to `import` them before adding them. This skill gives Claude the exact workflow, requirements, and the real list of available components.
