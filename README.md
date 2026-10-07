@@ -4,7 +4,7 @@ A [Claude Agent Skill](https://docs.claude.com/en/docs/claude-code/skills) that 
 
 > ⚠️ **Unofficial.** This is a community-made skill, not affiliated with the Devigner team. It just wraps their public CLI and workflow so Claude uses them the right way.
 
-[![skills.sh](https://skills.sh/b/XDMustafa/devigner-ui-skill)](https://skills.sh/XDMustafa/devigner-ui-skill)
+[![skills.sh](https://skills.sh/b/xdmustafa/devigner-ui-skill)](https://skills.sh/xdmustafa/devigner-ui-skill)
 
 ## Why this exists
 
