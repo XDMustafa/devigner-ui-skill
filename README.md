@@ -6,7 +6,7 @@ A [Claude Agent Skill](https://docs.claude.com/en/docs/claude-code/skills) that 
 
 [![skills.sh](https://skills.sh/b/xdmustafa/devigner-ui-skill)](https://skills.sh/xdmustafa/devigner-ui-skill)
 
-## install
+## install (Skills.sh)
 
 ```
 npx skills add https://github.com/xdmustafa/devigner-ui-skill --skill devigner-ui
