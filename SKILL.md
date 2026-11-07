@@ -1,6 +1,6 @@
 ---
 name: devigner-ui
-description: Use when building or styling a React/Next.js web UI and the user wants polished, animated components. Devigner UI is a shadcn/ui-style library whose components install as plain .tsx files via a CLI (npx devignerui add <name>). Trigger on requests to build pages, landing pages, dashboards, or UI with Devigner UI, or when components/ui and components.json from devignerui exist.
+description: Use when the user explicitly asks for Devigner UI (npx devignerui, ui.devigner.cc, its components) or the project already uses it — devignerui in package.json, or components/ui/*.tsx written by its CLI. Do not introduce Devigner UI into a project that doesn't use it unless asked. It is a shadcn/ui-style library whose components install as plain .tsx files via a CLI (npx devignerui add <name>).
 ---
 
 # Devigner UI
@@ -9,6 +9,11 @@ Devigner UI is a library of animated, accessible React components. It works
 like shadcn/ui: components are **copied as plain `.tsx` files** into
 `components/ui`, not imported from an npm package. Once added, each file is a
 normal file in the repo that you can read and edit freely.
+
+**Scope:** this skill never installs Devigner UI into a project that doesn't
+already use it (`devignerui` in package.json, or CLI-generated files under
+`components/ui/`) unless the user explicitly asks for Devigner UI. A
+`components.json` alone is not a signal — shadcn/ui creates that too.
 
 ## Requirements
 
@@ -36,13 +41,19 @@ normal file in the repo that you can read and edit freely.
    npx devignerui add <component-name>
    ```
 
-4. **Read the component's official guide.** Every component has a ready-made
-   markdown guide with props, keyboard behavior, and troubleshooting:
-   ```text
-   https://ui.devigner.cc/llms/<component-name>.md
-   ```
-   (`https://ui.devigner.cc/llms-full.txt` has all of them in one file.)
-   Read it before writing any props — never guess prop names.
+4. **Read the props — local file first, site guide second.**
+   1. **Primary:** the installed `components/ui/<name>.tsx` itself. Its
+      interfaces/types are the exact truth for the installed version, and
+      always readable — no network needed.
+   2. **Secondary:** the official markdown guide for docs the file doesn't
+      spell out (keyboard behavior, troubleshooting):
+      ```text
+      https://ui.devigner.cc/llms/<component-name>.md
+      ```
+      (`https://ui.devigner.cc/llms-full.txt` has all of them in one file.)
+      The site may document a **newer** version than installed — when the two
+      disagree, the local file wins.
+   Never guess prop names.
 
 5. **Install dependencies.** After adding, the CLI prints the packages that
    component needs (commonly `cn`, `motion`, `react`). Install them with the
@@ -59,16 +70,11 @@ normal file in the repo that you can read and edit freely.
 
 ## Known components (verify with `npx devignerui list`)
 
-28 as of devignerui v1.9.0. Marketing: flick-cards-slider, menu-notch,
-rating, flip-button, contact-lens, timeline, magnetic-button. Interface:
-command-palette, context-menu, dynamic-island, morphing-popover, tabs,
-expand-tabs, stardust-slider, badge, image-generation, kpi-chart,
-copy-button, nav-notch, liquid-glass, slider, file-upload, goo-switch,
-inline-time-edit, date-range-picker, chart-card, delete-button, menu-dock.
-
-Recently updated by upstream: liquid-glass, file-upload, date-range-picker,
-chart-card, menu-dock — re-`add` them (or diff against components/ui/) when a
-project pins an older version.
+28 as of devignerui v1.9.0 — this list rots with every release, so always
+confirm against `npx devignerui list` (what your installed version ships) or
+https://ui.devigner.cc/components (what exists today). Don't guess names from
+memory. Upstream also re-ships existing components — e.g. liquid-glass,
+file-upload, date-range-picker, chart-card and menu-dock changed in v1.9.0.
 
 ## Rules
 
@@ -77,11 +83,15 @@ project pins an older version.
   library, build it with standard React + Tailwind instead.
 - Always run `add` before importing a component — importing before adding will
   fail because the file won't exist yet.
-- Read the component's guide (`https://ui.devigner.cc/llms/<name>.md`) before
-  using it; never guess props.
+- Read props from the local `components/ui/<name>.tsx` first (exact match for
+  the installed version, works offline), then the site guide
+  (`https://ui.devigner.cc/llms/<name>.md`); on conflict the local file wins.
+  Never guess props.
 - Don't import Devigner UI components from a package path; they live under
   `components/ui/`.
-- Reuse already-added components; don't re-run `add` for files that exist.
+- Don't re-run `add` for files that exist — it overwrites manual edits. The
+  only exception is when the user explicitly asks for the upstream update;
+  then show them a diff first, because their customizations will be lost.
 
 **Before a production build** (code splitting, deployment, Lighthouse scores),
 read `references/performance.md` in this skill — Vite 8/Rolldown pitfalls and

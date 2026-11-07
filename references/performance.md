@@ -3,6 +3,12 @@
 Lessons from shipping a Vite 8 + Devigner UI site to GitHub Pages. Read this
 before a production build or when a lazy route shows a blank page.
 
+**Versions these were tested on:** Vite 8.3.4 / Rolldown 1.2.13,
+devignerui 1.9.0 (Nov 2026). These are workarounds with an expiry date —
+before applying any of them, confirm the problem still exists (reproduce the
+error, or check the current Vite/Rolldown changelog). None of this is
+Devigner-specific; it applies to any Vite 8 project.
+
 ## Vite 8 uses Rolldown, not Rollup
 
 - `build.rollupOptions.output.chunkFileNames` / `assetFileNames` are not
@@ -13,6 +19,8 @@ before a production build or when a lazy route shows a blank page.
   ignores source edits. Deploy `dist/` via CI workflow only.
 
 ## `cssCodeSplit: false` leaves a ghost CSS reference
+
+**Only if you actually see this error** (and upstream hasn't fixed it yet):
 
 `build.cssCodeSplit: false` merges emitted CSS into one file, but Rolldown
 keeps a **stale per-chunk CSS name in the JS chunk manifest**. At runtime the
@@ -60,12 +68,20 @@ screen, no console error:
 </Suspense>
 ```
 
-## Measured results (example site)
+## Measured results (example from one project)
 
-- Icons barrel alias + code-splitting: main bundle 837 KB → 433 KB
-  (gzip 263 KB → 138 KB); heavy content (KaTeX) in a separate lazy chunk.
-- Static prerender of the shell into `index.html` gives first paint without
-  waiting for JS; React replaces it on mount.
-- Fonts: convert TTF → WOFF2 with a Persian+Latin subset
-  (`pyftsubset --unicodes=U+0600-06FF,…`), drop unused weights, preload only
-  the body font, keep `font-display: swap`.
+**Example from one project** — a Persian/English blog (KaTeX, GitHub Pages,
+Persian fonts). Don't treat these as a required recipe for every site; they
+are what that project did, not what Devigner demands.
+
+- **Devigner-specific (2 of these):** icons barrel alias (root entry pulls
+  every icon export, doesn't tree-shake) and dropping `transition-colors`
+  from menu-dock rows for compositor-friendly hover.
+- **General web work (everything else):** code-splitting (main bundle
+  837 KB → 433 KB, gzip 263 KB → 138 KB), prerendering the shell into
+  `index.html` for first paint before JS, and font subsetting
+  (TTF → WOFF2 with `pyftsubset --unicodes=U+0600-06FF,…`, drop unused
+  weights, preload only the body font, keep `font-display: swap`).
+
+The overall PageSpeed jump on that site (56 → 98) came mostly from the
+general work, not from Devigner UI itself.

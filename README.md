@@ -37,7 +37,7 @@ devigner-ui-skill/          (rename to devigner-ui/ when installing)
 
 ## How it activates
 
-The agent loads the skill when a task matches its `description` — for example when you ask it to build a page with Devigner UI, or when a project already contains a `components.json` and `components/ui` folder created by the CLI.
+The agent loads the skill when a task matches its `description` — when you explicitly ask for Devigner UI (by name, CLI, or site), or when the project already uses it (`devignerui` in package.json, or CLI-generated files in `components/ui/`). It deliberately does **not** trigger on generic "build me an animated UI" requests, and the skill tells the agent never to introduce Devigner UI into a project that doesn't use it unless asked. A `components.json` alone is not a signal — shadcn/ui creates that too.
 
 ## Project requirements
 
@@ -62,7 +62,7 @@ npx devignerui list
 npx devignerui add magnetic-button
 ```
 
-Then read the component's official guide (props, keyboard, troubleshooting) before using it:
+Then read the props — the installed `components/ui/<name>.tsx` first (exact for your version, works offline), then the official guide for keyboard behavior and troubleshooting (may document a newer version; on conflict the local file wins):
 
 ```text
 https://ui.devigner.cc/llms/<component-name>.md
