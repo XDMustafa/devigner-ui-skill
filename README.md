@@ -71,11 +71,15 @@ import { MagneticButton } from "@/components/ui/magnetic-button";
 
 ## Available components
 
-As of Devigner UI **v1.7.0** (18 components):
+As of Devigner UI **v1.9.0** (28 components):
 
-`stardust-slider` · `badge` · `image-generation` · `kpi-chart` · `contact-lens` · `copy-button` · `nav-notch` · `liquid-glass` · `slider` · `file-upload` · `goo-switch` · `inline-time-edit` · `date-range-picker` · `chart-card` · `delete-button` · `menu-dock` · `timeline` · `magnetic-button`
+**Marketing (7):** `flick-cards-slider` · `menu-notch` · `rating` · `flip-button` · `contact-lens` · `timeline` · `magnetic-button`
 
-Always run `npx devignerui list` for the current set — the library adds components regularly.
+**Interface (21):** `command-palette` · `context-menu` · `dynamic-island` · `morphing-popover` · `tabs` · `expand-tabs` · `stardust-slider` · `badge` · `image-generation` · `kpi-chart` · `copy-button` · `nav-notch` · `liquid-glass` · `slider` · `file-upload` · `goo-switch` · `inline-time-edit` · `date-range-picker` · `chart-card` · `delete-button` · `menu-dock`
+
+Recently updated upstream: `liquid-glass`, `file-upload`, `date-range-picker`, `chart-card`, `menu-dock`.
+
+Always run `npx devignerui list` for what **your installed version** ships — it lags the website when a project pins an older `devignerui`. When in doubt, check https://ui.devigner.cc/components or use `npx devignerui@latest list`.
 
 ## Links
 

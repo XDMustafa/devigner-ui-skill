@@ -51,10 +51,16 @@ normal file in the repo that you can read and edit freely.
 
 ## Known components (verify with `npx devignerui list`)
 
-magnetic-button, slider, stardust-slider, badge, kpi-chart, chart-card,
-copy-button, nav-notch, liquid-glass, file-upload, goo-switch,
-date-range-picker, delete-button, menu-dock, timeline, contact-lens,
-image-generation, inline-time-edit.
+28 as of devignerui v1.9.0. Marketing: flick-cards-slider, menu-notch,
+rating, flip-button, contact-lens, timeline, magnetic-button. Interface:
+command-palette, context-menu, dynamic-island, morphing-popover, tabs,
+expand-tabs, stardust-slider, badge, image-generation, kpi-chart,
+copy-button, nav-notch, liquid-glass, slider, file-upload, goo-switch,
+inline-time-edit, date-range-picker, chart-card, delete-button, menu-dock.
+
+Recently updated by upstream: liquid-glass, file-upload, date-range-picker,
+chart-card, menu-dock — re-`add` them (or diff against components/ui/) when a
+project pins an older version.
 
 ## Rules
 
@@ -70,6 +76,17 @@ image-generation, inline-time-edit.
 
 Practical lessons from shipping sites built with these components. Read these
 before wiring a Devigner component into a production build.
+
+### The CLI list lags the website
+
+`npx devignerui list` reports what the **locally installed** `devignerui`
+package ships — a project pinning `^1.7.0` lists 18 components while the site
+(https://ui.devigner.cc/components) has 28. If a component the user names is
+missing from `list`, check the site or run `npx devignerui@latest list`
+before telling them it doesn't exist. Upstream also re-ships existing
+components (liquid-glass, file-upload, date-range-picker, chart-card,
+menu-dock were updated in v1.9.0) — an old pin won't get those updates from
+`add`.
 
 ### Icons: alias the root, subpaths pass through
 
